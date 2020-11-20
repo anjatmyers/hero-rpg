@@ -1,6 +1,5 @@
 #### Hero rpg game
 
-
 class Character: 
     def __init__(self, health, power, name):
         self.health = health
@@ -8,34 +7,55 @@ class Character:
         self.name = name
 
     def alive(self):
-        if self.health > 0:
-            return True
-        elif self.name == 'Superman':
-            print("You are dead.")
-        else:
-            print(f"The {self.name} is dead!")
+        return self.health > 0
     
+                
     def print_status(self):
-        if self.name == 'Superman':
-            print(f'You have {self.health} health and {self.power} power.')
-        else:
-            print(f'{self.name} has {self.health} health and {self.power} power.')
+        print(f'{self.name} has {self.health} health and {self.power} power.')
 
     def attack(self, enemy):
-        enemy.health -= self.power
-        if self.name == 'Superman':
-            print(f"You do {self.power} damage to the {enemy.name}.")
-        else:
-            print(f"{self.name} does {self.power} damage to you.")
+        if not self.alive():
+            return
+        print(f"{self.name} attacks!")
+        enemy.receive_damage(self.power)
+    
+    
+class Hero(Character):
+    def receive_damage(self, power):
+        self.health -= power
 
-class Immortal_Enemy(Character):
+        print(f"{self.name} received {power} damage.")
+
+        if self.health <= 0:
+            print(f"{self.name} is dead.")
+
+
+class Enemy(Character):
+    def receive_damage(self, power):
+        import random
+        rand_num = random.randint(1, 10)
+        if rand_num > 8: 
+            self.health -= (power * 2)
+            print(f"Critical Hit! Double damage!")
+        else:
+            self.health -= power
+            print(f"{self.name} received {power} damage.")
+
+        if self.health <= 0:
+            print(f"{self.name} is dead.")
+        
+
+
+class Immortal_Enemy(Enemy):
     def alive(self):
         return True
 
+class Medic(Enemy):
+    pass
 
-
-hero = Character(10, 5, 'Superman')
-goblin = Character(6, 2, 'Goblin King')
+hero = Hero(10, 4, 'Sir John')
+goblin = Enemy(9, 2, 'Goblin King')
+medic = Enemy(10, 2, 'Medic')
 zombie = Immortal_Enemy(4, 1, 'Zombie')
 
 def intro_question():
@@ -46,23 +66,24 @@ def intro_question():
     print("3. flee")
     print("> ", end=' ')
 
+def battle():
+    while goblin.alive() and hero.alive():
+            hero.print_status()
+            goblin.print_status()
 
+            intro_question()
+            raw_input = input()
+            if raw_input == "1":
+                hero.attack(goblin)
+            elif raw_input == "2":
+                pass
+            elif raw_input == "3":
+                print("Goodbye.")
+                break
+            else:
+                print("Invalid input {}".format(raw_input))
 
-while goblin.alive() and hero.alive():
-        hero.print_status()
-        goblin.print_status()
+            if goblin.alive():
+                goblin.attack(hero)
 
-        intro_question()
-        raw_input = input()
-        if raw_input == "1":
-            hero.attack(goblin)
-        elif raw_input == "2":
-            pass
-        elif raw_input == "3":
-            print("Goodbye.")
-            break
-        else:
-            print("Invalid input {}".format(raw_input))
-
-        if goblin.alive():
-            goblin.attack(hero)
+battle()

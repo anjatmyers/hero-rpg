@@ -1,8 +1,8 @@
-# In this simple RPG game, the hero fights the goblin. He has the options to:
+# # In this simple RPG game, the hero fights the goblin. He has the options to:
 
-# 1. fight goblin
-# 2. do nothing - in which case the goblin will attack him anyway
-# 3. flee
+# # 1. fight goblin
+# # 2. do nothing - in which case the goblin will attack him anyway
+# # 3. flee
 
 def main():
     hero_health = 10
@@ -42,3 +42,8 @@ def main():
                 print("You are dead.")
 
 main()
+
+### generates random num 1-10
+# import random
+# rand_num = random.randint(1, 10)
+# print(rand_num)
