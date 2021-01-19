@@ -12,7 +12,7 @@ class Character:
     
                 
     def print_status(self):
-        print(f'{self.name} has {self.health} health and {self.power} power.')
+        print(f'{self.name} has {self.health} health and {self.power} power.`)
 
     def attack(self, enemy):
         if not self.alive():
@@ -20,7 +20,7 @@ class Character:
         print(f"{self.name} attacks!")
         enemy.receive_damage(self.power)
     
-    # def bounty(self, )
+   ### Make a class store
 class Tonic(object):
     def __init__(self, cost, name):
         self.cost = 5 
@@ -45,9 +45,7 @@ class Evade(object):
         self.cost = 3
         self.name = 'evade'
 
-    # def apply(self, hero):
-    #     hero.power += 2
-    #     print(f"{hero.name} power increased to {hero.power}")
+
 items = [Tonic, Sword]
 
 tonic = Tonic(5, 'tonic')
