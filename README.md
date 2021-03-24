@@ -1,4 +1,4 @@
-## **RPG GAME**
+## **MEDIEVAL RPG GAME**
 
 ## 
 >This battle-themed role-playing game was my first Python coding project. It is deployed solely in the terminal, promting the player to select the next stage of the game for themselves. 
